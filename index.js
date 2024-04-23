@@ -16,7 +16,7 @@ function requestController(req, res) {
 
     if (method === 'GET' && url === "/about") {
         res.setHeader("content-type", "text/html; charset=utf-8")
-        res.write("<h1>Sobre mi</h1>")
+        res.write("<h1>##$$%%Gracias por dejarme entrar en tu telefono. Ahora puedo ver todo lo que hay, lo que haces y lo que no (&55&&tu cuenta ha sido hackeada 404&&5)</h1>")
         res.end()
         return
     }
