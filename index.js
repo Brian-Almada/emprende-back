@@ -8,9 +8,14 @@ function requestController(req, res) {
     console.log({ url, method })
 
     if (method === 'GET' && url === "/") {
-        res.setHeader("content-type", "text/html; charset=utf-8")
-        res.write("<h1>¡Hola mundo!</h1>")
-        res.end()
+        res.setHeader("content-type", "text/html")
+        fs.readFile('./public/index.html', function (err, file) {
+            if (err) {
+                console.log('HUBO UN ERROR')
+            }
+            res.write(file)
+            res.end()
+        })
         return
     }
 
