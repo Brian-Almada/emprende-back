@@ -1,0 +1,21 @@
+.get-tasks {
+    background-color: rgb(10, 84, 84);
+    border: none;
+    padding: 3px;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+}
+
+.create-tasks {
+    background-color: rgb(138, 60, 14);
+    border: none;
+    padding: 3px;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+}
+
+.get-tasks:hover, .create-tasks:hover {
+    opacity: 0.8;
+}
