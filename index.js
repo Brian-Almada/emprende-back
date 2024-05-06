@@ -5,7 +5,13 @@ const port = process.env.PORT
 
 app.use(express.static('public'))
 
-app.get('/', (req, res) => {
+app.use((req, res, next) => {
+    console.log("No especificamos inicio de ruta")
+    console.log("middleware1")
+    next()
+})
+
+app.get('/api/tasks', (req, res) => {
     res.send('Hello World!')
 })
 
