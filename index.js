@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 mongoose
 .connect(process.env.MONGODB_URL)
@@ -11,6 +12,11 @@ mongoose
 })
 .catch((err) => {
     console.log('Hubo un error para conectar BBDD', {err})
+})
+
+const taskSchema = new Schema({
+    name: String,
+    done: Boolean
 })
 
 app.use(express.static('public'))
