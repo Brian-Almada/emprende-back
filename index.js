@@ -19,6 +19,8 @@ const taskSchema = new Schema({
     done: Boolean
 })
 
+const Task = mongoose.model('Task', taskSchema, "Tasks")
+
 app.use(express.static('public'))
 app.use(express.json())
 
@@ -35,7 +37,27 @@ app.get('/api/tasks', (req, res) => {
 app.post("/api/tasks", (req, res) => {
     const body = req.body
     console.log({ body })
-    res.status(201).json({ ok: true, message: "tarea creada con exito" })
+    Task.create({
+        name: body.text,
+        done: false
+    })
+    .then((createdTask) => {
+        res
+        .status(201)
+        .json({
+            ok: true,
+            message: "tarea creada con exito",
+            data: createdTask
+        })
+    })
+    .catch((err) => {
+        res
+        .status(400)
+        .json({
+            ok: false,
+            message: 'Error al crear tarea'
+        })
+    })
 })
 
 app.listen(port, () => {
