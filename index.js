@@ -2,6 +2,16 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const port = process.env.PORT
+const mongoose = require('mongoose')
+
+mongoose
+.connect(process.env.MONGODB_URL)
+.then(() => {
+    console.log("Base de datos conectada")
+})
+.catch((err) => {
+    console.log('Hubo un error para conectar BBDD', {err})
+})
 
 app.use(express.static('public'))
 app.use(express.json())
