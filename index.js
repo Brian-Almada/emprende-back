@@ -39,6 +39,14 @@ app.get('/api/tasks', (req, res) => {
             data:tasks
         })
     })
+    .catch((err) => {
+        res
+        .status(400)
+        .json({
+            ok: true,
+            message: 'Error al obtener tareas'
+        })
+    })
 })
 
 app.post("/api/tasks", (req, res) => {
@@ -63,6 +71,26 @@ app.post("/api/tasks", (req, res) => {
         .json({
             ok: false,
             message: 'Error al crear tarea'
+        })
+    })
+})
+app.delete("/api/tasks/:id", (req, res) => {
+    const id = req.params.id
+    Task.findByIdAndRemove(id)
+    .then((deletedTask) => {
+        res
+        .status(200)
+        .json({
+            ok: true,
+            data: deletedTask
+        })
+    })
+    .catch((err) => {
+        res
+        .status(400)
+        .json({
+            ok: false,
+            message: 'Error al borrar tarea'
         })
     })
 })

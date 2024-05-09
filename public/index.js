@@ -1,6 +1,6 @@
 const createBtn = document.querySelector(".create-tasks");
 const input = document.querySelector(".task-name");
-const tasksContainer = document.querySelector(".tasks");
+const tasksDiv = document.querySelector(".tasks");
 const baseBackendUrl = "http://localhost:4000/api"
 
 createBtn.addEventListener("click", function () {
@@ -30,9 +30,14 @@ function getTasks() {
 
         for (const task of tasks) {
             const taskPharagraph = document.createElement("p")
+            const deleteTaskBtn = document.createElement("button")
+            const taskContainerDiv = document.createElement("div")
+            deleteTaskBtn.innerText = "BORRAR"
             taskPharagraph.innerText = task.name
-            taskPharagraph.setAttribute("id", task._id)
-            tasksContainer.appendChild(taskPharagraph)
+            deleteTaskBtn.setAttribute("id", task._id)
+            taskContainerDiv.appendChild(taskPharagraph)
+            taskContainerDiv.appendChild(deleteTaskBtn)
+            tasksDiv.appendChild(taskContainerDiv)
         }
     })
 }
