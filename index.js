@@ -31,7 +31,14 @@ app.use((req, res, next) => {
 })
 
 app.get('/api/tasks', (req, res) => {
-    res.send('Hello World!')
+    Task.find().then((tasks) => {
+        res
+        .status(200)
+        .json({
+            ok: true,
+            data:tasks
+        })
+    })
 })
 
 app.post("/api/tasks", (req, res) => {
