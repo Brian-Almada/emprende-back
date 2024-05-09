@@ -1,6 +1,6 @@
 const createBtn = document.querySelector(".create-tasks");
 const input = document.querySelector(".task-name");
-
+const tasksContainer = document.querySelector(".tasks");
 const baseBackendUrl = "http://localhost:4000/api"
 
 createBtn.addEventListener("click", function () {
@@ -23,11 +23,17 @@ createBtn.addEventListener("click", function () {
 function getTasks() {
     fetch(`${baseBackendUrl}/tasks`)
     .then((res) => {
-        console.log({res})
         return res.json()
     })
     .then((resJSON) => {
-        console.log(resJSON)
+        const tasks = resJSON.data
+
+        for (const task of tasks) {
+            const taskPharagraph = document.createElement("p")
+            taskPharagraph.innerText = task.name
+            taskPharagraph.setAttribute("id", task._id)
+            tasksContainer.appendChild(taskPharagraph)
+        }
     })
 }
 
