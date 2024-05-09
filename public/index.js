@@ -12,7 +12,7 @@ createBtn.addEventListener("click", function () {
         body: JSON.stringify({text: input.value})
     })
     .then((res) => {
-        console.log({res})
+        getTasks()
         return res.json()
     })
     .then((resJSON) => {
@@ -21,6 +21,7 @@ createBtn.addEventListener("click", function () {
 })
 
 function getTasks() {
+    tasksDiv.innerHTML = null
     fetch(`${baseBackendUrl}/tasks`)
     .then((res) => {
         return res.json()
@@ -35,6 +36,16 @@ function getTasks() {
             deleteTaskBtn.innerText = "BORRAR"
             taskPharagraph.innerText = task.name
             deleteTaskBtn.setAttribute("id", task._id)
+            deleteTaskBtn.addEventListener("click", (e) => {
+                const taskId = e.target.id
+                fetch(`${baseBackendUrl}/tasks/${taskId}`, {
+                    method: "DELETE"
+                })
+                .then(() => {
+                    const taskDiv = deleteTaskBtn.parentElement
+                    taskDiv.remove()
+                })
+            })
             taskContainerDiv.appendChild(taskPharagraph)
             taskContainerDiv.appendChild(deleteTaskBtn)
             tasksDiv.appendChild(taskContainerDiv)
