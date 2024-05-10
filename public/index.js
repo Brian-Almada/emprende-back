@@ -1,11 +1,11 @@
-const createBtn = document.querySelector(".create-tasks");
+const createEditBtn = document.querySelector(".create-tasks");
 const input = document.querySelector(".task-name");
 const tasksDiv = document.querySelector(".tasks");
 const baseBackendUrl = "http://localhost:4000/api"
 
 let TASK_TO_EDIT = null;
 
-createBtn.addEventListener("click", function () {
+createEditBtn.addEventListener("click", function () {
     console.log("CREAR TAREAS");
     console.log({ input })
     fetch(`${baseBackendUrl}/tasks`, {
@@ -50,7 +50,9 @@ function getTasks() {
                 })
             })
             taskPharagraph.addEventListener("click", (e) => {
-                input.value = taskPharagraph.innerText
+                input.value = task.name
+                createEditBtn.innerText = "Editar Tarea"
+                TASK_TO_EDIT = task
             })
             taskContainerDiv.appendChild(taskPharagraph)
             taskContainerDiv.appendChild(deleteTaskBtn)
