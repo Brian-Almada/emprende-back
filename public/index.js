@@ -1,7 +1,8 @@
 const createEditBtn = document.querySelector(".create-tasks");
 const input = document.querySelector(".task-name");
 const tasksDiv = document.querySelector(".tasks");
-const baseBackendUrl = "http://localhost:4000/api"
+
+const baseBackendUrl = `${window.origin}/api`
 
 let TASK_TO_EDIT = null;
 
