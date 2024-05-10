@@ -19,6 +19,7 @@ createEditBtn.addEventListener("click", function () {
     .then((res) => {
         getTasks()
         input.value = ""
+        createEditBtn.innerText = "Crear Tarea"
         return res.json()
     })
     .then((resJSON) => {
