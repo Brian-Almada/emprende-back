@@ -3,6 +3,8 @@ const input = document.querySelector(".task-name");
 const tasksDiv = document.querySelector(".tasks");
 const baseBackendUrl = "http://localhost:4000/api"
 
+let TASK_TO_EDIT = null;
+
 createBtn.addEventListener("click", function () {
     console.log("CREAR TAREAS");
     console.log({ input })
@@ -13,6 +15,7 @@ createBtn.addEventListener("click", function () {
     })
     .then((res) => {
         getTasks()
+        input.value = ""
         return res.json()
     })
     .then((resJSON) => {
@@ -45,6 +48,9 @@ function getTasks() {
                     const taskDiv = deleteTaskBtn.parentElement
                     taskDiv.remove()
                 })
+            })
+            taskPharagraph.addEventListener("click", (e) => {
+                input.value = taskPharagraph.innerText
             })
             taskContainerDiv.appendChild(taskPharagraph)
             taskContainerDiv.appendChild(deleteTaskBtn)
