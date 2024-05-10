@@ -7,9 +7,12 @@ let TASK_TO_EDIT = null;
 
 createEditBtn.addEventListener("click", function () {
     console.log("CREAR TAREAS");
+    const creating = !TASK_TO_EDIT;
     console.log({ input })
-    fetch(`${baseBackendUrl}/tasks`, {
-        method: "POST",
+    const path = creating ? "tasks/create" : `tasks/${TASK_TO_EDIT._id}`
+    const method = creating ? "POST" : "PUT"
+    fetch(`${baseBackendUrl}/${path}`, {
+        method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({text: input.value})
     })

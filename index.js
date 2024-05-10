@@ -94,6 +94,30 @@ app.delete("/api/tasks/:id", (req, res) => {
         })
     })
 })
+app.put("/api/tasks/:id", (req, res) => {
+    const body = req.body
+    const id = req.params.id
+    Task.findByIdAndUpdate(id,{
+        name: body.text
+    })
+    .then((updatedTask) => {
+        res
+        .status(200)
+        .json({
+            ok: true,
+            message: "tarea editada con exito",
+            data: updatedTask
+        })
+    })
+    .catch((err) => {
+        res
+        .status(400)
+        .json({
+            ok: false,
+            message: 'Error al editar tarea'
+        })
+    })
+})
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
