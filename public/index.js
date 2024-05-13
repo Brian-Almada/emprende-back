@@ -17,15 +17,12 @@ createEditBtn.addEventListener("click", async function () {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({text: input.value})
     })
-    .then((res) => {
-        getTasks()
-        input.value = ""
-        createEditBtn.innerText = "Crear Tarea"
-        return res.json()
-    })
-    .then((resJSON) => {
-        console.log(resJSON)
-    })
+    getTasks()
+    input.value = ""
+    createEditBtn.innerText = "Crear Tarea"
+    const resJSON = await res.json()
+
+    console.log(resJSON)
 })
 
 function getTasks() {
