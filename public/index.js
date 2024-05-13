@@ -6,13 +6,13 @@ const baseBackendUrl = `${window.origin}/api`
 
 let TASK_TO_EDIT = null;
 
-createEditBtn.addEventListener("click", function () {
+createEditBtn.addEventListener("click", async function () {
     console.log("CREAR TAREAS");
     const creating = !TASK_TO_EDIT;
     console.log({ input })
     const path = creating ? "tasks/create" : `tasks/${TASK_TO_EDIT._id}`
     const method = creating ? "POST" : "PUT"
-    fetch(`${baseBackendUrl}/${path}`, {
+    const res = await fetch(`${baseBackendUrl}/${path}`, {
         method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({text: input.value})
