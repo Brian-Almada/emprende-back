@@ -76,7 +76,7 @@ app.post("/api/tasks", (req, res) => {
 })
 app.delete("/api/tasks/:id", (req, res) => {
     const id = req.params.id
-    Task.findOneAndDelete(id)
+    Task.findOneAndDelete({ _id: id })
     .then((deletedTask) => {
         res
         .status(200)
