@@ -25,23 +25,19 @@ createEditBtn.addEventListener("click", async function () {
     console.log(resJSON)
 })
 
-function getTasks() {
+async function getTasks() {
     tasksDiv.innerHTML = null
-    fetch(`${baseBackendUrl}/tasks`)
-    .then((res) => {
-        return res.json()
-    })
-    .then((resJSON) => {
-        const tasks = resJSON.data
-
-        for (const task of tasks) {
-            const taskPharagraph = document.createElement("p")
-            const deleteTaskBtn = document.createElement("button")
-            const taskContainerDiv = document.createElement("div")
-            deleteTaskBtn.innerText = "BORRAR"
-            taskPharagraph.innerText = task.name
-            deleteTaskBtn.setAttribute("id", task._id)
-            deleteTaskBtn.addEventListener("click", (e) => {
+    const res = await fetch(`${baseBackendUrl}/tasks`)
+    const resJSON = await res.json()
+    const tasks = resJSON.data
+    for (const task of tasks) {
+        const taskPharagraph = document.createElement("p")
+        const deleteTaskBtn = document.createElement("button")
+        const taskContainerDiv = document.createElement("div")
+        deleteTaskBtn.innerText = "BORRAR"
+        taskPharagraph.innerText = task.name
+        deleteTaskBtn.setAttribute("id", task._id)
+        deleteTaskBtn.addEventListener("click", (e) => {
                 const taskId = e.target.id
                 fetch(`${baseBackendUrl}/tasks/${taskId}`, {
                     method: "DELETE"
@@ -50,17 +46,16 @@ function getTasks() {
                     const taskDiv = deleteTaskBtn.parentElement
                     taskDiv.remove()
                 })
-            })
-            taskPharagraph.addEventListener("click", (e) => {
-                input.value = task.name
-                createEditBtn.innerText = "Editar Tarea"
-                TASK_TO_EDIT = task
-            })
-            taskContainerDiv.appendChild(taskPharagraph)
-            taskContainerDiv.appendChild(deleteTaskBtn)
-            tasksDiv.appendChild(taskContainerDiv)
-        }
-    })
+        })
+        taskPharagraph.addEventListener("click", (e) => {
+            input.value = task.name
+            createEditBtn.innerText = "Editar Tarea"
+            TASK_TO_EDIT = task
+        })
+        taskContainerDiv.appendChild(taskPharagraph)
+        taskContainerDiv.appendChild(deleteTaskBtn)
+        tasksDiv.appendChild(taskContainerDiv)
+    }
 }
 
 getTasks()
