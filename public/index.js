@@ -9,8 +9,7 @@ let TASK_TO_EDIT = null;
 createEditBtn.addEventListener("click", async function () {
     console.log("CREAR TAREAS");
     const creating = !TASK_TO_EDIT;
-    console.log({ input })
-    const path = creating ? "tasks/create" : `tasks/${TASK_TO_EDIT._id}`
+    const path = creating ? "tasks" : `tasks/${TASK_TO_EDIT._id}`
     const method = creating ? "POST" : "PUT"
     const res = await fetch(`${baseBackendUrl}/${path}`, {
         method,
@@ -22,7 +21,7 @@ createEditBtn.addEventListener("click", async function () {
     createEditBtn.innerText = "Crear Tarea"
     const resJSON = await res.json()
 
-    console.log(resJSON)
+    console.log({resJSON})
 })
 
 async function getTasks() {
