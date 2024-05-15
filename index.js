@@ -22,7 +22,7 @@ const taskSchema = new Schema({
 
 const Task = mongoose.model('Task', taskSchema, "Tasks")
 
-app.use(express.static('public'))
+app.use(express.static('public', { extensions: ['html', 'css', 'js'] }))
 app.use(express.json())
 
 app.use((req, res, next) => {
@@ -123,7 +123,7 @@ app.put("/api/tasks/:id", (req, res) => {
 app.post("/api/auth/login/:email/code", async function (req, res) {
     const { email } = req.params
     const result = await transporter.sendMail({
-        from: `Brian Almada${process.env.EMAIL}`,
+        from: `Brian Almada ${process.env.EMAIL}`,
         to: email,
         subjet: "Código de inicio de sesión: ",
         body: "Este es tu código para iniciar sesión: ",
