@@ -19,8 +19,15 @@ const taskSchema = new Schema({
     name: String,
     done: Boolean
 })
+const userSchema = new Schema({
+    firstname: String,
+    lastname: Boolean,
+    email: String,
+    login_code: String
+})
 
 const Task = mongoose.model('Task', taskSchema, "Tasks")
+const User = mongoose.model('User', taskSchema, "Users")
 
 app.use(express.static('public', { extensions: ['html', 'css', 'js'] }))
 app.use(express.json())
@@ -122,10 +129,25 @@ app.put("/api/tasks/:id", (req, res) => {
 
 app.post("/api/auth/login/:email/code", async function (req, res) {
     const { email } = req.params
+
+    const user = await User.findOne({ email })
+
+    if(!user) {
+        return res
+        .status(400)
+        .json({ ok: false, message: "No existe un correo con ese usuario" })
+    }
+
+    let code = ""
+    for (let index = 0; index <= 5; index++) {
+    let character = Math.floor(Math.random() * 9)
+    code += character
+    }
+
     const result = await transporter.sendMail({
         from: `Brian Almada ${process.env.EMAIL}`,
         to: email,
-        subjet: "Código de inicio de sesión: ",
+        subjet: "Código de inicio de sesión: " + code,
         body: "Este es tu código para iniciar sesión: ",
     })
     console.log({ result })
