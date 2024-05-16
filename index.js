@@ -27,7 +27,7 @@ const userSchema = new Schema({
 })
 
 const Task = mongoose.model('Task', taskSchema, "Tasks")
-const User = mongoose.model('User', taskSchema, "Users")
+const User = mongoose.model('User',userSchema, "Users")
 
 app.use(express.static('public', { extensions: ['html', 'css', 'js'] }))
 app.use(express.json())
