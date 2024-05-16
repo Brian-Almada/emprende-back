@@ -21,10 +21,15 @@ form.addEventListener('submit', async function (e) {
     console.log("Pidiendo código")
 
     const res = await fetch(
-        `${baseBackendUrl}/auth/login/${inputEmail.value}/code`,
+        `${baseBackendUrl}/auth/login/${inputEmail.value}`,
         {
             method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                code: inputCode.value
+            }),
         }
     )
     const resJSON = await res.json()
+    console.log(resJSON)
 })
