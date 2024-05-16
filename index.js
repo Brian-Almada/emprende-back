@@ -144,6 +144,9 @@ app.post("/api/auth/login/:email/code", async function (req, res) {
     code += character
     }
 
+    const login_code = code
+    await user.save()
+
     const result = await transporter.sendMail({
         from: `Brian Almada ${process.env.EMAIL}`,
         to: email,
@@ -152,6 +155,20 @@ app.post("/api/auth/login/:email/code", async function (req, res) {
     })
     console.log({ result })
     res.status(200).json({ ok: true, message: "Código enviado con éxito!" })
+})
+app.post("/api/auth/login/:email", async function (req, res) {
+    const { email } = req.params
+    const { code } = req.body
+
+    const user = await User.findOne({ email, login_code: code })
+
+    if(!user) {
+        return res
+        .status(400)
+        .json({ ok: false, message: "Credenciales Inválidas" })
+    }
+
+    res.status(200).json({ ok: true, message: "Inicio de sesión exitoso" })
 })
 
 app.listen(port, () => {
