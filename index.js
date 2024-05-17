@@ -144,7 +144,9 @@ app.post("/api/auth/login/:email/code", async function (req, res) {
     code += character
     }
 
-    const login_code = code
+    console.log({code})
+
+    user.login_code = code
     await user.save()
 
     const result = await transporter.sendMail({
