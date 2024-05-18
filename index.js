@@ -21,7 +21,7 @@ const taskSchema = new Schema({
 })
 const userSchema = new Schema({
     firstname: String,
-    lastname: Boolean,
+    lastname: String,
     email: String,
     login_code: String
 })
@@ -130,6 +130,7 @@ app.put("/api/tasks/:id", (req, res) => {
 app.post("/api/auth/login/:email/code", async function (req, res) {
     const { email } = req.params
 
+    console.log({email})
     const user = await User.findOne({ email })
 
     if(!user) {
@@ -152,7 +153,7 @@ app.post("/api/auth/login/:email/code", async function (req, res) {
     const result = await transporter.sendMail({
         from: `Brian Almada ${process.env.EMAIL}`,
         to: email,
-        subjet: "Código de inicio de sesión: " + code,
+        subject: "Código de inicio de sesión: " + code,
         body: "Este es tu código para iniciar sesión: ",
     })
     console.log({ result })
@@ -174,5 +175,5 @@ app.post("/api/auth/login/:email", async function (req, res) {
 })
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`App listening on:${port}`)
 })
