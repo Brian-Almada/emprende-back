@@ -130,10 +130,13 @@ app.put("/api/tasks/:id", (req, res) => {
 app.post("/api/auth/login/:email/code", async function (req, res) {
     const { email } = req.params
 
+
     console.log({email})
     const user = await User.findOne({ email })
+    console.log({user})
 
     if(!user) {
+        /*await User.create({email, firstname: "Brian", lastname: "Almada"})*/
         return res
         .status(400)
         .json({ ok: false, message: "No existe un correo con ese usuario" })
@@ -148,6 +151,7 @@ app.post("/api/auth/login/:email/code", async function (req, res) {
     console.log({code})
 
     user.login_code = code
+    console.log({user})
     await user.save()
 
     const result = await transporter.sendMail({

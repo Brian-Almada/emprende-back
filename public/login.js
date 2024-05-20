@@ -15,10 +15,11 @@ codeBtn.addEventListener('click', async function (e) {
         }
     )
     const resJSON = await res.json()
+    console.log(resJSON)
 })
 form.addEventListener('submit', async function (e) {
     e.preventDefault()
-    console.log("Pidiendo código")
+    console.log("Intentando iniciar sesión...")
 
     const res = await fetch(
         `${baseBackendUrl}/auth/login/${inputEmail.value}`,
