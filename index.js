@@ -183,8 +183,16 @@ app.post("/api/auth/login/:email", async function (req, res) {
     }
 
     const token = jwt.sign(tokenPayload, process.env.JWT_SECRET_KEY)
+    console.log({token})
+    res.cookie("jwt", token)
 
-    res.status(200).json({ ok: true, message: "Inicio de sesión exitoso" })
+    res
+    .status(200)
+    .json({
+        ok: true,
+        data: tokenPayload,
+        message: "Inicio de sesión exitoso"
+    })
 })
 
 app.listen(port, () => {
