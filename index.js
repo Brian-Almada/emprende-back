@@ -5,6 +5,7 @@ const port = process.env.PORT
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const transporter = require('./helpers/mailer')
+const jwt = require('jsonwebtoken')
 
 mongoose
 .connect(process.env.MONGODB_URL)
