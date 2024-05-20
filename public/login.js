@@ -22,15 +22,15 @@ form.addEventListener('submit', async function (e) {
     console.log("Intentando iniciar sesión...")
 
     const res = await fetch(
-        `${baseBackendUrl}/auth/login/${inputEmail.value}`,
-        {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                code: inputCode.value
-            }),
-        }
-    )
+    `${baseBackendUrl}/auth/login/${inputEmail.value}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            code: inputCode.value
+        }),
+    })
+
     const resJSON = await res.json()
+    window.location.href = "/"
     console.log(resJSON)
 })
