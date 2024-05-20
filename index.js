@@ -176,6 +176,14 @@ app.post("/api/auth/login/:email", async function (req, res) {
         .json({ ok: false, message: "Credenciales Inválidas" })
     }
 
+    const tokenPayload = {
+        _id: user._id,
+        firstname: user.firstname,
+        email: user.email
+    }
+
+    const token = jwt.sign(tokenPayload, process.env.JWT_SECRET_KEY)
+
     res.status(200).json({ ok: true, message: "Inicio de sesión exitoso" })
 })
 
