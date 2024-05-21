@@ -1,10 +1,8 @@
 require('dotenv').config()
 const express = require('express')
-const mongoose = require('mongoose')
 const app = express()
 const port = process.env.PORT
 const dbConnect = require('./db/connect')
-const Schema = mongoose.Schema
 const transporter = require('./helpers/mailer')
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
@@ -12,10 +10,6 @@ const cookieParser = require('cookie-parser')
 dbConnect()
 
 
-const taskSchema = new Schema({
-    name: String,
-    done: Boolean
-})
 const userSchema = new Schema({
     firstname: String,
     lastname: String,
@@ -23,7 +17,6 @@ const userSchema = new Schema({
     login_code: String
 })
 
-const Task = mongoose.model('Task', taskSchema, "Tasks")
 const User = mongoose.model('User',userSchema, "Users")
 
 //Middlewares
