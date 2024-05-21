@@ -9,16 +9,6 @@ const cookieParser = require('cookie-parser')
 
 dbConnect()
 
-
-const userSchema = new Schema({
-    firstname: String,
-    lastname: String,
-    email: String,
-    login_code: String
-})
-
-const User = mongoose.model('User',userSchema, "Users")
-
 //Middlewares
 app.use(express.static('public', { extensions: ['html', 'css', 'js'] }))
 app.use(express.json())
