@@ -1,21 +1,16 @@
 require('dotenv').config()
 const express = require('express')
+const mongoose = require('mongoose')
 const app = express()
 const port = process.env.PORT
-const mongoose = require('mongoose')
+const dbConnect = require('./db/connect')
 const Schema = mongoose.Schema
 const transporter = require('./helpers/mailer')
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
 
-mongoose
-.connect(process.env.MONGODB_URL)
-.then(() => {
-    console.log("Base de datos conectada")
-})
-.catch((err) => {
-    console.log('Hubo un error para conectar BBDD', {err})
-})
+dbConnect()
+
 
 const taskSchema = new Schema({
     name: String,
