@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const port = process.env.PORT
+
 const dbConnect = require('./db/connect')
 const cookieParser = require('cookie-parser')
 const taskRoutes = require('./routes/task')
@@ -16,10 +16,12 @@ app.use(express.json())
 app.use(cookieParser())
 
 //Routes
-app.use('/api/tasks', taskRoutes)
+app.use('/api/auth', authRoutes)
 app.use(jwtValidation)
 
-app.use('/api/auth', authRoutes)
+app.use('/api/tasks', taskRoutes)
+
+const port = process.env.PORT
 
 app.listen(port, () => {
     console.log(`App listening on:${port}`)
