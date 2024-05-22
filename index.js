@@ -6,6 +6,7 @@ const dbConnect = require('./db/connect')
 const cookieParser = require('cookie-parser')
 const taskRoutes = require('./routes/task')
 const authRoutes = require('./routes/auth')
+const { jwtValidation } = require('./middlewares/jwtValidation')
 
 dbConnect()
 
@@ -14,25 +15,10 @@ app.use(express.static('public', { extensions: ['html', 'css', 'js'] }))
 app.use(express.json())
 app.use(cookieParser())
 
-const jwtValidation =  (req, res, next) => {
-    try {
-    const token = req.cookies.jwt
-    const validPayload = jwt.verify(token, process.env.JWT_SECRET_KEY)
-    console.log(validPayload)
-    next()
-} catch (error) {
-    res
-    .status(401)
-    .json({
-        ok: false,
-        message: 'TOKEN inválido'
-    })
-}
-}
-app.use(jwtValidation)
-
 //Routes
 app.use('/api/tasks', taskRoutes)
+app.use(jwtValidation)
+
 app.use('/api/auth', authRoutes)
 
 app.listen(port, () => {
