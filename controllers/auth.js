@@ -1,5 +1,6 @@
 const { transporter } = require("../helpers/mailer")
 const { User } = require("../models/user")
+const jwt = require('jsonwebtoken')
 
 
 const getCode = async function (req, res) {
