@@ -8,7 +8,10 @@ const baseBackendUrl = `${window.origin}/api`
 codeBtn.addEventListener('click', async function (e) {
     console.log("Pidiendo código")
     try {
-        if (!inputEmail.value) return
+        if (!inputEmail.value) {
+            Swal.fire("UPS!", "Debes Ingresar un Email", "error")
+            return
+        }
         const res = await fetch(
             `${baseBackendUrl}/auth/login/${inputEmail.value}/code`,
             {
