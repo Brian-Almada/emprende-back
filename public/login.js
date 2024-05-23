@@ -7,16 +7,21 @@ const baseBackendUrl = `${window.origin}/api`
 
 codeBtn.addEventListener('click', async function (e) {
     console.log("Pidiendo código")
-
-    const res = await fetch(
-        `${baseBackendUrl}/auth/login/${inputEmail.value}/code`,
-        {
-            method: 'POST',
-        }
-    )
-    const resJSON = await res.json()
-    console.log(resJSON)
+    try {
+        if (!inputEmail.value) return
+        const res = await fetch(
+            `${baseBackendUrl}/auth/login/${inputEmail.value}/code`,
+            {
+                method: 'POST',
+            }
+        )
+        const resJSON = await res.json()
+        console.log(resJSON)
+    } catch (error) {
+        console.log(error)
+    }
 })
+
 form.addEventListener('submit', async function (e) {
     e.preventDefault()
     console.log("Intentando iniciar sesión...")
