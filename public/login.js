@@ -8,7 +8,7 @@ const baseBackendUrl = `${window.origin}/api`
 codeBtn.addEventListener('click', async function (e) {
     console.log("Pidiendo código")
     try {
-        if (!inputEmail.value || !inputCode.value) {
+        if (!inputEmail.value) {
             Swal.fire("UPS!", "Debes Ingresar un Email", "error")
             return
         }
@@ -28,6 +28,10 @@ codeBtn.addEventListener('click', async function (e) {
 form.addEventListener('submit', async function (e) {
     e.preventDefault()
     console.log("Intentando iniciar sesión...")
+    if (!inputEmail.value || !inputCode.value) {
+        Swal.fire("UPS!", "Debes Ingresar un Email", "error")
+        return
+    }
 
     const res = await fetch(
     `${baseBackendUrl}/auth/login/${inputEmail.value}`, {
