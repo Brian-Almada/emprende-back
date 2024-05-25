@@ -31,18 +31,18 @@ async function getTasks() {
     const tasks = resJSON.data
     for (const task of tasks) {
         const taskPharagraph = document.createElement("p")
-        const deleteTaskBtn = document.createElement("button")
+        const deleteTaskIcon = document.createElement("i")
         const taskContainerDiv = document.createElement("div")
-        deleteTaskBtn.innerText = "BORRAR"
+        deleteTaskIcon.classList.add("fa-solid", "fa-trash-can")
         taskPharagraph.innerText = task.name
-        deleteTaskBtn.setAttribute("id", task._id)
-        deleteTaskBtn.addEventListener("click", (e) => {
+        deleteTaskIcon.setAttribute("id", task._id)
+        deleteTaskIcon.addEventListener("click", (e) => {
                 const taskId = e.target.id
                 fetch(`${baseBackendUrl}/tasks/${taskId}`, {
                     method: "DELETE"
                 })
                 .then(() => {
-                    const taskDiv = deleteTaskBtn.parentElement
+                    const taskDiv = deleteTaskIcon.parentElement
                     taskDiv.remove()
                 })
         })
@@ -52,7 +52,7 @@ async function getTasks() {
             TASK_TO_EDIT = task
         })
         taskContainerDiv.appendChild(taskPharagraph)
-        taskContainerDiv.appendChild(deleteTaskBtn)
+        taskContainerDiv.appendChild(deleteTaskIcon)
         tasksDiv.appendChild(taskContainerDiv)
     }
 }

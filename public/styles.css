@@ -10,3 +10,16 @@
 .create-tasks:hover {
     opacity: 0.8;
 }
+
+.fa-trash-can {
+    color: rgb(244,54, 54);
+    cursor: pointer;
+}
+
+.fa-trash-can:hover {
+    opacity: 0.8;
+}
+
+.tasks {
+    margin-top: 1rem ;
+}
