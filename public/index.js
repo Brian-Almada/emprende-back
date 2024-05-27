@@ -30,7 +30,7 @@ async function getTasks() {
     const resJSON = await res.json()
     const tasks = resJSON.data
     for (const task of tasks) {
-        const taskPharagraph = document.createElement("p")
+        const taskPharagraph = document.createElement("span")
         const deleteTaskIcon = document.createElement("i")
         const taskContainerDiv = document.createElement("div")
         deleteTaskIcon.classList.add("fa-solid", "fa-trash-can")

@@ -7,6 +7,8 @@
     cursor: pointer;
 }
 
+span {margin-right: 1rem;}
+
 .create-tasks:hover {
     opacity: 0.8;
 }
