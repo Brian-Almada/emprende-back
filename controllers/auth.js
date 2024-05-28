@@ -12,7 +12,7 @@ const getCode = async function (req, res) {
     console.log({user})
 
     if(!user) {
-        /*await User.create({email, firstname: "Brian", lastname: "Almada"})*/
+        await User.create({email, firstname: "Franco", lastname: "Almada"})
         return res
         .status(400)
         .json({ ok: false, message: "No existe un correo con ese usuario" })
